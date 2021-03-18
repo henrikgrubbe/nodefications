@@ -1,5 +1,10 @@
 # Project exclude paths
 /node_modules/
+/dist/
+
+# IntelliJ files
+/.idea/
+*.iml
 
 # Environment variables
 .env
