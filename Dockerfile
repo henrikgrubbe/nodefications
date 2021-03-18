@@ -11,7 +11,7 @@ RUN npm ci --quiet && npm run build
 
 # Production stage
 FROM node:15.11.0-alpine3.10
-LABEL org.opencontainers.image.source "https://github.com/Hense94/nodefications"
+LABEL org.opencontainers.image.source="https://github.com/Hense94/nodefications"
 
 WORKDIR /app
 ENV NODE_ENV=production
