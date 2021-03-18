@@ -28,5 +28,6 @@ jobs:
         with:
           builder: ${{ steps.buildx.outputs.name }}
           context: .
-          tags: ${{ steps.prep.outputs.tags }}
-          push: ${{ github.event_name != 'pull_request' }}
+#          file: ./docker/image/app/Dockerfile
+          tags: hense94/nodefications:latest
+          push: true
