@@ -28,6 +28,6 @@ jobs:
         with:
           builder: ${{ steps.buildx.outputs.name }}
           context: .
-#          file: ./docker/image/app/Dockerfile
+          file: ./docker/image/Dockerfile
           tags: hense94/nodefications:latest
           push: true
