@@ -6,19 +6,32 @@ import {Notification} from './notification.interface';
 
 export async function sendToTopic(topic: string, notification: Notification): Promise<any> {
     const message: TopicMessage = {
-        notification,
-        topic
+        topic,
+        notification: {
+            title: notification.title,
+            body: notification.body
+        },
+        data: {
+            topic,
+            ...notification.data
+        }
     };
 
-    return firebaseAdmin.messaging().send(message)
-        .then((val) => console.log(val))
-        .catch((err) => console.error(err));
+    console.log(message);
+
+    return firebaseAdmin.messaging().send(message);
 }
 
 export async function sendToToken(token: string, notification: Notification): Promise<any> {
     const message: TokenMessage = {
-        notification,
-        token
+        token,
+        notification: {
+            title: notification.title,
+            body: notification.body
+        },
+        data: {
+            ...notification.data
+        }
     };
 
     return firebaseAdmin.messaging().send(message);
