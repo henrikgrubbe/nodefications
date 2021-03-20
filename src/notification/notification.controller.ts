@@ -17,3 +17,4 @@ notificationRouter.post('/token/:token', async (req: Request, res: Response) => 
         .then(() => res.status(204).send())
         .catch((err) => res.status(500).send(err))
 });
+
