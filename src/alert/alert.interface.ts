@@ -2,7 +2,13 @@ export type EvalMatch = {
     value: number;
 }
 
-export type AlertState = 'ok' | 'paused' | 'alerting' | 'pending' | 'no_data';
+export enum AlertState {
+    OK = 'ok',
+    // PAUSED = 'paused',
+    ALERTING = 'alerting',
+    // PENDING = 'pending',
+    NO_DATA = 'no_data'
+}
 
 export type Tags = {
     [tagName: string]: string;
@@ -27,9 +33,8 @@ export interface RuleDictionary {
     [ruleName: string]: AlertRule;
 }
 
-export interface AlertRule {
-    ok: AlertRuleState;
-    alerting: AlertRuleState;
+export type AlertRule = {
+    [state in AlertState]: AlertRuleState;
 }
 
 export interface AlertRuleState {

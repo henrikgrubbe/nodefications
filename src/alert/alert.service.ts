@@ -1,16 +1,20 @@
-import {Alert, EvalMatch, RuleDictionary, Tags} from './alert.interface';
+import {Alert, AlertState, EvalMatch, RuleDictionary, Tags} from './alert.interface';
 import * as NotificationService from "../notification/notification.service";
 import {Notification} from '../notification/notification.interface';
 
 const ruleDictionary: RuleDictionary = {
     greenhouse_temp: {
-        ok: {
+        [AlertState.OK]: {
             title: 'Greenhouse OK',
             body: 'Average temperature over the last {{period}} was below {{threshold}} °C'
         },
-        alerting: {
+        [AlertState.ALERTING]: {
             title: 'Greenhouse too hot',
             body: 'Average temperature over the last {{period}} was above {{threshold}} °C ({{eval_match_0}} °C)'
+        },
+        [AlertState.NO_DATA]: {
+            title: 'Greenhouse error',
+            body: 'There was no data from the greenhouse during the last {{period}}'
         }
     }
 }
@@ -23,7 +27,7 @@ export async function sendNotification(alert: Alert): Promise<any> {
 
     const notification: Notification = buildNotification(alert);
 
-    const promises = [];
+    const promises: Promise<any>[] = [];
     topics
         .forEach((topic) => {
             promises.push(
@@ -50,9 +54,12 @@ function buildNotification(alert: Alert): Notification {
     let title: string = alert.title;
     let body: string = alert.message;
 
-    if (alertRule && alertRule[alert.state]) {
-        title = alertRule[alert.state].title;
-        body =  alertRule[alert.state].body;
+    if (alertRule) {
+        const alertRuleState = alertRule[alert.state];
+        if (alertRuleState) {
+            title = alertRuleState.title;
+            body = alertRuleState.body;
+        }
     }
 
     return {
