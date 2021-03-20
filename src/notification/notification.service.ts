@@ -17,8 +17,6 @@ export async function sendToTopic(topic: string, notification: Notification): Pr
         }
     };
 
-    console.log(message);
-
     return firebaseAdmin.messaging().send(message);
 }
 
