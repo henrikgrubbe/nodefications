@@ -4,7 +4,8 @@ import {initFirebase} from './firebase';
 export function init() {
     dotenv.config();
     const envVars: Record<string, string | undefined> = {
-        'PORT': process.env.PORT
+        'PORT': process.env.PORT,
+        'DEBUG': process.env.DEBUG
     };
     checkEnvVars(envVars);
 

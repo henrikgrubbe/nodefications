@@ -17,6 +17,10 @@ export async function sendToTopic(topic: string, notification: Notification): Pr
         }
     };
 
+    if (debug()) {
+        console.log('Topic message', message);
+    }
+
     return firebaseAdmin.messaging().send(message);
 }
 
@@ -32,5 +36,13 @@ export async function sendToToken(token: string, notification: Notification): Pr
         }
     };
 
+    if (debug()) {
+        console.log('Token message', message);
+    }
+
     return firebaseAdmin.messaging().send(message);
+}
+
+function debug(): boolean {
+    return (process.env.DEBUG as string).toLowerCase() === 'true';
 }
