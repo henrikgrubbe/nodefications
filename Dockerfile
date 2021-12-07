@@ -15,7 +15,8 @@ LABEL org.opencontainers.image.source="https://github.com/Hense94/nodefications"
 
 WORKDIR /app
 ENV NODE_ENV=production
-ENV PORT=3000
+ENV PORT=8080
+ENV DEBUG=false
 
 
 COPY package*.json ./
