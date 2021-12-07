@@ -16,7 +16,7 @@ export async function sendToTopic(topic: string, notification: Notification): Pr
     };
 
     if (debug()) {
-        console.log('Topic message', message);
+        console.log('Sending topic message', message);
     }
 
     return firebaseAdmin.messaging().send(message);
@@ -35,7 +35,7 @@ export async function sendToToken(token: string, notification: Notification): Pr
     };
 
     if (debug()) {
-        console.log('Token message', message);
+        console.log('Sending token message', message);
     }
 
     return firebaseAdmin.messaging().send(message);

@@ -20,12 +20,12 @@ const ruleDictionary: RuleDictionary = {
 }
 
 export async function sendNotification(alert: Alert): Promise<any> {
+    const notification: Notification = buildNotification(alert);
+
     const topics: string[] = extractTopics(alert.tags);
     if (topics.length === 0) {
         topics.push("debug");
     }
-
-    const notification: Notification = buildNotification(alert);
 
     const promises: Promise<any>[] = [];
     topics

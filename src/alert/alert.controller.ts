@@ -5,9 +5,16 @@ import {Alert} from './alert.interface';
 export const alertRouter = express.Router();
 
 alertRouter.post('/', async (req: Request, res: Response) => {
-    const alert: Alert = req.body;
+    if (debug()) {
+        console.log('Received alert body', req.body);
+    }
 
+    const alert: Alert = req.body;
     AlertService.sendNotification(alert)
         .then(() => res.status(204).send())
         .catch((err) => res.status(500).send(err))
 });
+
+function debug(): boolean {
+    return (process.env.DEBUG as string).toLowerCase() === 'true';
+}
