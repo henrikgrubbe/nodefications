@@ -1,7 +1,5 @@
 const firebaseAdmin = require("firebase-admin");
-import {messaging} from 'firebase-admin/lib/messaging';
-import TopicMessage = messaging.TopicMessage;
-import TokenMessage = messaging.TokenMessage;
+import {TokenMessage, TopicMessage} from "firebase-admin/lib/messaging";
 import {Notification} from './notification.interface';
 
 export async function sendToTopic(topic: string, notification: Notification): Promise<any> {

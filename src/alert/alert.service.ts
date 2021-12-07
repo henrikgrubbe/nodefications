@@ -22,7 +22,7 @@ const ruleDictionary: RuleDictionary = {
 export async function sendNotification(alert: Alert): Promise<any> {
     const topics: string[] = extractTopics(alert.tags);
     if (topics.length === 0) {
-        return Promise.reject("Alert missing topic(s)");
+        topics.push("debug");
     }
 
     const notification: Notification = buildNotification(alert);
