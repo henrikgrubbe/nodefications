@@ -21,7 +21,7 @@ notificationRouter.post('/token/:token', async (req: Request, res: Response) => 
     }
 
     const notification: Notification = req.body;
-    await NotificationService.sendToToken(req.params.topic, notification)
+    await NotificationService.sendToToken(req.params.token, notification)
         .then(() => res.status(204).send())
         .catch((err) => res.status(500).send(err))
 });
